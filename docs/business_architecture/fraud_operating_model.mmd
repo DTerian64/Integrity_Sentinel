@@ -1,0 +1,19 @@
+flowchart TB
+
+    PREVENT["Prevent"]
+    DETECT["Detect"]
+    INVESTIGATE["Investigate"]
+    RESPOND["Respond"]
+    IMPROVE["Continuously Improve"]
+
+    PREVENT --> DETECT
+    DETECT --> INVESTIGATE
+    INVESTIGATE --> RESPOND
+    RESPOND --> IMPROVE
+    IMPROVE --> PREVENT
+
+    PREVENT --- POLICY["Policies & Controls"]
+    DETECT --- ANALYTICS["Behavioral Analytics"]
+    INVESTIGATE --- CASES["Case Management"]
+    RESPOND --- ACTIONS["Remediation & Escalation"]
+    IMPROVE --- FEEDBACK["Model & Policy Feedback"]

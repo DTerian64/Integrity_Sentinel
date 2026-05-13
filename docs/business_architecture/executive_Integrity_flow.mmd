@@ -1,0 +1,14 @@
+flowchart LR
+
+    DATA["Enterprise Operational Data"]
+    MONITOR["Continuous Integrity Monitoring"]
+    DETECT["Behavioral & Relationship Analytics"]
+    AI["AI Investigation & Risk Explanation"]
+    DECISION["Operational & Executive Decision Support"]
+    ACTION["Governance, Compliance & Corrective Action"]
+
+    DATA --> MONITOR
+    MONITOR --> DETECT
+    DETECT --> AI
+    AI --> DECISION
+    DECISION --> ACTION

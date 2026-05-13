@@ -1,0 +1,101 @@
+flowchart TB
+    %% Integrity Sentinel - Multi-Tenant SaaS Architecture
+    %% Purpose: Show tenant isolation, shared platform services, and tenant-scoped data boundaries.
+
+    subgraph TENANTS["Enterprise Tenants"]
+        T1["Tenant A"]
+        T2["Tenant B"]
+        T3["Tenant C"]
+    end
+
+    subgraph IDENTITY["Identity & Access"]
+        SSO["Enterprise SSO / Microsoft Entra ID"]
+        RBAC["Tenant-Scoped RBAC"]
+        CLAIMS["Tenant Claims & Context"]
+    end
+
+    subgraph EDGE["SaaS Access Layer"]
+        FRONTDOOR["Global Entry / Front Door"]
+        UI["Web Application"]
+        API["API Gateway"]
+    end
+
+    subgraph PLATFORM["Shared Platform Services"]
+        TENANT_SERVICE["Tenant Management Service"]
+        POLICY["Policy Configuration Service"]
+        INGEST["Ingestion Orchestration"]
+        RISK["Risk Scoring Service"]
+        AI["AI Investigation Service"]
+        CASES["Case Management Service"]
+        AUDIT["Audit Logging Service"]
+    end
+
+    subgraph DATA["Tenant-Scoped Data Boundary"]
+        SQL["Tenant-Scoped Operational Data"]
+        GRAPH["Tenant-Scoped Integrity Graph"]
+        LAKE["Tenant Evidence Store"]
+        VECTOR["Tenant Vector Index"]
+        LOGS["Immutable Audit Logs"]
+    end
+
+    subgraph GOVERNANCE["Security & Governance Controls"]
+        KEYS["Key Vault / Secret Isolation"]
+        ENCRYPT["Encryption at Rest & Transit"]
+        RETENTION["Retention Policies"]
+        OBS["Observability & Monitoring"]
+    end
+
+    T1 --> SSO
+    T2 --> SSO
+    T3 --> SSO
+
+    SSO --> RBAC
+    RBAC --> CLAIMS
+    CLAIMS --> FRONTDOOR
+    FRONTDOOR --> UI
+    UI --> API
+
+    API --> TENANT_SERVICE
+    API --> POLICY
+    API --> RISK
+    API --> AI
+    API --> CASES
+
+    CLAIMS --> TENANT_SERVICE
+    TENANT_SERVICE --> SQL
+    TENANT_SERVICE --> GRAPH
+    TENANT_SERVICE --> LAKE
+    TENANT_SERVICE --> VECTOR
+
+    INGEST --> SQL
+    INGEST --> GRAPH
+    INGEST --> LAKE
+    RISK --> SQL
+    RISK --> GRAPH
+    AI --> GRAPH
+    AI --> LAKE
+    AI --> VECTOR
+    CASES --> SQL
+    AUDIT --> LOGS
+
+    POLICY --> RISK
+    POLICY --> CASES
+
+    KEYS --> PLATFORM
+    ENCRYPT --> DATA
+    RETENTION --> DATA
+    OBS --> EDGE
+    OBS --> PLATFORM
+    OBS --> DATA
+
+    classDef tenant fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+    classDef identity fill:#312e81,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef platform fill:#1e293b,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef data fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef gov fill:#422006,stroke:#f59e0b,color:#fef3c7,stroke-width:1px;
+
+    class T1,T2,T3 tenant;
+    class SSO,RBAC,CLAIMS identity;
+    class FRONTDOOR,UI,API,TENANT_SERVICE,POLICY,INGEST,RISK,AI,CASES,AUDIT platform;
+    class SQL,GRAPH,LAKE,VECTOR,LOGS data;
+    class KEYS,ENCRYPT,RETENTION,OBS gov;

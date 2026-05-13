@@ -1,0 +1,112 @@
+flowchart TB
+    %% Integrity Sentinel - Azure Deployment Topology
+    %% Purpose: Show a plausible Azure-native deployment model for the platform.
+
+    USERS["Users / Enterprise Tenants"]
+    DNS["Azure DNS\nterian-services.com"]
+    FD["Azure Front Door\nGlobal Routing + TLS"]
+    SWA["Azure Static Web Apps\nReact Frontend"]
+
+    subgraph ACA["Azure Container Apps Environment"]
+        API["FastAPI Backend API"]
+        INGEST["Ingestion Worker"]
+        RISK["Risk Scoring Worker"]
+        AI["AI Investigation Service"]
+        CASES["Case Management Service"]
+    end
+
+    subgraph DATA["Data Platform"]
+        SQL["Azure SQL Database\nOperational Data"]
+        COSMOS["Azure Cosmos DB / Graph Store\nEntity Relationships"]
+        BLOB["Azure Blob Storage\nEvidence Store"]
+        SEARCH["Azure AI Search / Vector Index\nSemantic Retrieval"]
+    end
+
+    subgraph AI_PLATFORM["AI & Analytics"]
+        AOAI["Azure OpenAI\nLLM Reasoning + Summaries"]
+        ML["ML / Analytics Jobs\nAnomaly Models"]
+    end
+
+    subgraph SECURITY["Security & Operations"]
+        ENTRA["Microsoft Entra ID\nSSO + App Registration"]
+        KV["Azure Key Vault\nSecrets + Keys"]
+        MI["Managed Identities"]
+        MON["Azure Monitor + App Insights"]
+        OTEL["OpenTelemetry"]
+    end
+
+    subgraph INTEGRATIONS["Enterprise Integrations"]
+        HRIS["HRIS"]
+        ERP["ERP / Finance"]
+        IAM["IAM / Access Logs"]
+        PROC["Procurement Systems"]
+        CUSTOM["Custom Applications"]
+    end
+
+    USERS --> DNS
+    DNS --> FD
+    FD --> SWA
+    SWA --> API
+
+    API --> CASES
+    API --> RISK
+    API --> AI
+    INGEST --> RISK
+    RISK --> CASES
+    AI --> CASES
+
+    HRIS --> INGEST
+    ERP --> INGEST
+    IAM --> INGEST
+    PROC --> INGEST
+    CUSTOM --> INGEST
+
+    API --> SQL
+    CASES --> SQL
+    RISK --> SQL
+    INGEST --> SQL
+
+    INGEST --> COSMOS
+    RISK --> COSMOS
+    AI --> COSMOS
+
+    INGEST --> BLOB
+    CASES --> BLOB
+    AI --> BLOB
+
+    AI --> SEARCH
+    SEARCH --> BLOB
+    AI --> AOAI
+    RISK --> ML
+    ML --> SQL
+    ML --> COSMOS
+
+    ENTRA --> SWA
+    ENTRA --> API
+    MI --> API
+    MI --> INGEST
+    MI --> RISK
+    MI --> AI
+    MI --> CASES
+    KV --> ACA
+
+    OTEL --> MON
+    API --> OTEL
+    INGEST --> OTEL
+    RISK --> OTEL
+    AI --> OTEL
+    CASES --> OTEL
+
+    classDef edge fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+    classDef app fill:#1e293b,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef data fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ai fill:#312e81,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef sec fill:#422006,stroke:#f59e0b,color:#fef3c7,stroke-width:1px;
+    classDef source fill:#3f3f46,stroke:#a1a1aa,color:#fafafa,stroke-width:1px;
+
+    class USERS,DNS,FD,SWA edge;
+    class API,INGEST,RISK,AI,CASES app;
+    class SQL,COSMOS,BLOB,SEARCH data;
+    class AOAI,ML ai;
+    class ENTRA,KV,MI,MON,OTEL sec;
+    class HRIS,ERP,IAM,PROC,CUSTOM source;

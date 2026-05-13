@@ -1,0 +1,22 @@
+flowchart TB
+
+    EXEC["Executives"]
+    COMPLIANCE["Compliance & Audit"]
+    INVESTIGATORS["Investigators"]
+    IT["Security & IT Operations"]
+    HR["HR & People Operations"]
+    PROCUREMENT["Procurement & Finance"]
+
+    PLATFORM["Integrity Sentinel Platform"]
+
+    EXEC --> PLATFORM
+    COMPLIANCE --> PLATFORM
+    INVESTIGATORS --> PLATFORM
+    IT --> PLATFORM
+    HR --> PLATFORM
+    PROCUREMENT --> PLATFORM
+
+    PLATFORM --> REPORTS["Executive Risk Reporting"]
+    PLATFORM --> ALERTS["Operational Risk Alerts"]
+    PLATFORM --> CASES["Investigation Workflows"]
+    PLATFORM --> INSIGHTS["Behavioral Intelligence Insights"]

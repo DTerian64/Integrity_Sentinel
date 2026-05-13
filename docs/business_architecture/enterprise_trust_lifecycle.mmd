@@ -1,0 +1,16 @@
+flowchart LR
+
+    ACTIVITY["Enterprise Activity"]
+    VISIBILITY["Operational Visibility"]
+    ANALYTICS["Behavioral & Relationship Analytics"]
+    RISK["Risk Identification"]
+    INVESTIGATION["Investigation & Evidence Correlation"]
+    GOVERNANCE["Governance & Compliance Action"]
+    TRUST["Organizational Trust & Integrity"]
+
+    ACTIVITY --> VISIBILITY
+    VISIBILITY --> ANALYTICS
+    ANALYTICS --> RISK
+    RISK --> INVESTIGATION
+    INVESTIGATION --> GOVERNANCE
+    GOVERNANCE --> TRUST

@@ -1,0 +1,71 @@
+flowchart TB
+    %% Integrity Sentinel Core - High-Level Architecture
+
+    subgraph USERS["Users & Enterprise Roles"]
+        EXEC["Executives / Leadership"]
+        AUDIT["Auditors / Compliance Officers"]
+        INVEST["Investigators / Analysts"]
+        ADMIN["Tenant Admins"]
+    end
+
+    subgraph UI["Integrity Sentinel Core UI"]
+        DASH["Executive Risk Dashboard"]
+        CASE["Investigation Workspace"]
+        GRAPHUI["Entity Relationship Explorer"]
+        ADMINUI["Tenant & Policy Administration"]
+    end
+
+    subgraph API["Core Platform API Layer"]
+        GATEWAY["API Gateway / Backend API"]
+        AUTHZ["RBAC / Authorization Service"]
+        TENANT["Tenant Context Service"]
+        CASEAPI["Case Management API"]
+        ALERTAPI["Alert & Risk API"]
+        ENTITYAPI["Entity Graph API"]
+    end
+
+    subgraph INGEST["Data Ingestion Layer"]
+        CONNECTORS["Enterprise Connectors"]
+        BATCH["Batch Import Jobs"]
+        EVENTS["Event Stream Ingestion"]
+        NORMALIZE["Data Normalization & Mapping"]
+    end
+
+    subgraph CORE["Integrity Intelligence Core"]
+        ONTOLOGY["Integrity Ontology / Entity Model"]
+        GRAPH["Enterprise Integrity Graph"]
+        RISK["Risk Scoring Engine"]
+        RULES["Policy & Rules Engine"]
+        ANOMALY["Anomaly Detection Engine"]
+        EVIDENCE["Evidence Correlation Service"]
+    end
+
+    subgraph AI["AI Investigation Layer"]
+        AGENT["Sentinel AI Investigator"]
+        SUMMARY["Narrative & Executive Summary Generator"]
+        EXPLAIN["Explainability / Reasoning Service"]
+    end
+
+    subgraph DATA["Core Data Stores"]
+        SQL["Operational Database\nCases, Alerts, Tenants, Policies"]
+        GRAPHDB["Graph Database\nEntities & Relationships"]
+        LAKE["Evidence Store / Data Lake"]
+        VECTOR["Vector Store\nSemantic Similarity & Retrieval"]
+        AUDITLOG["Immutable Audit Log"]
+    end
+
+    subgraph SECURITY["Security, Identity & Governance"]
+        ENTRA["Microsoft Entra ID / SSO"]
+        SECRETS["Key Vault / Secrets Management"]
+        OBS["Observability\nLogs, Metrics, Traces"]
+        COMPLIANCE["Retention & Governance Controls"]
+    end
+
+    subgraph SOURCES["Enterprise Source Systems"]
+        HRIS["HRIS / Employee Systems"]
+        ERP["ERP / Finance Systems"]
+        PROCUREMENT["Procurement Systems"]
+        IAM["Identity & Access Systems"]
+        COLLAB["Collaboration / Communication Metadata"]
+        CUSTOM["Custom Business Applications"]
+    end

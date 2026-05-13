@@ -1,0 +1,19 @@
+flowchart TB
+
+    SOURCES["Enterprise Source Systems"]
+
+    INGEST["Data Ingestion Layer"]
+
+    CORE["Integrity Intelligence Core"]
+
+    AI["AI Investigation Layer"]
+
+    API["Core Platform API Layer"]
+
+    UI["User Experience & Investigation Workspace"]
+
+    SOURCES --> INGEST
+    INGEST --> CORE
+    CORE --> AI
+    AI --> API
+    API --> UI

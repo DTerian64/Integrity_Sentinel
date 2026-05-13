@@ -1,0 +1,50 @@
+flowchart TB
+    %% Integrity Sentinel - Investigation Lifecycle
+    %% Purpose: Show how risk alerts move through an enterprise investigation process.
+
+    ALERT["Risk Alert Generated"]
+    TRIAGE["Initial Triage"]
+    CASE["Investigation Case Created"]
+    EVIDENCE["Evidence Aggregation"]
+    AI_SUMMARY["AI Investigation Summary"]
+    REVIEW["Investigator Review"]
+    DECISION{"Decision"}
+    FALSE_POSITIVE["Close as False Positive"]
+    MONITOR["Monitor / Watchlist"]
+    ESCALATE["Escalate to Compliance / Legal / Security"]
+    ACTION["Corrective or Preventive Action"]
+    RESOLUTION["Case Resolution"]
+    AUDIT["Audit Archive & Evidence Retention"]
+    FEEDBACK["Feedback to Risk Models"]
+
+    ALERT --> TRIAGE
+    TRIAGE --> CASE
+    CASE --> EVIDENCE
+    EVIDENCE --> AI_SUMMARY
+    AI_SUMMARY --> REVIEW
+    REVIEW --> DECISION
+
+    DECISION -->|Not suspicious| FALSE_POSITIVE
+    DECISION -->|Needs observation| MONITOR
+    DECISION -->|Confirmed or high risk| ESCALATE
+
+    FALSE_POSITIVE --> RESOLUTION
+    MONITOR --> RESOLUTION
+    ESCALATE --> ACTION
+    ACTION --> RESOLUTION
+
+    RESOLUTION --> AUDIT
+    RESOLUTION --> FEEDBACK
+    FEEDBACK --> ALERT
+
+    classDef alert fill:#7f1d1d,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef process fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+    classDef decision fill:#422006,stroke:#f59e0b,color:#fef3c7,stroke-width:1px;
+    classDef close fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef archive fill:#312e81,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+
+    class ALERT alert;
+    class TRIAGE,CASE,EVIDENCE,AI_SUMMARY,REVIEW,ACTION process;
+    class DECISION decision;
+    class FALSE_POSITIVE,MONITOR,ESCALATE,RESOLUTION close;
+    class AUDIT,FEEDBACK archive;

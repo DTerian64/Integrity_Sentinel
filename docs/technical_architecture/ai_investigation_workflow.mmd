@@ -1,0 +1,51 @@
+flowchart TB
+    %% Integrity Sentinel - AI Investigation Workflow
+    %% Purpose: Show how an anomaly becomes an AI-assisted investigation.
+
+    SIGNALS["Operational Signals\nApprovals, transactions, access events, requests"]
+    DETECT["Anomaly / Risk Detection"]
+    ALERT["Risk Alert Created"]
+    CONTEXT["Context Retrieval"]
+    GRAPH["Enterprise Integrity Graph Query"]
+    EVIDENCE["Evidence Correlation"]
+    AI["Sentinel AI Investigator"]
+    EXPLAIN["Risk Explanation"]
+    SUMMARY["Investigation Narrative / Executive Summary"]
+    CASE["Investigation Case"]
+    REVIEW["Investigator Review"]
+    ACTION["Escalation / Compliance Action"]
+    ARCHIVE["Audit Archive / Evidence Retention"]
+
+    SIGNALS --> DETECT
+    DETECT --> ALERT
+    ALERT --> CONTEXT
+
+    CONTEXT --> GRAPH
+    CONTEXT --> EVIDENCE
+
+    GRAPH --> AI
+    EVIDENCE --> AI
+    ALERT --> AI
+
+    AI --> EXPLAIN
+    AI --> SUMMARY
+    EXPLAIN --> CASE
+    SUMMARY --> CASE
+
+    CASE --> REVIEW
+    REVIEW --> ACTION
+    ACTION --> ARCHIVE
+    REVIEW --> ARCHIVE
+
+    REVIEW -->|request more context| CONTEXT
+    AI -->|identify related entities| GRAPH
+
+    classDef source fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+    classDef ai fill:#312e81,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef case fill:#1e293b,stroke:#f59e0b,color:#fff7ed,stroke-width:1px;
+    classDef action fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+
+    class SIGNALS,DETECT,ALERT,CONTEXT,GRAPH,EVIDENCE source;
+    class AI,EXPLAIN,SUMMARY ai;
+    class CASE,REVIEW case;
+    class ACTION,ARCHIVE action;

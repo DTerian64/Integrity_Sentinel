@@ -1,0 +1,16 @@
+flowchart LR
+
+    SOURCES["Enterprise Systems & Workflows"]
+    INGEST["Operational Data Collection"]
+    INTEL["Relationship & Behavioral Intelligence"]
+    AI["AI Investigation Assistance"]
+    CASES["Operational Investigation Workflows"]
+    GOVERNANCE["Governance & Compliance Action"]
+    OUTCOME["Reduced Fraud & Improved Trust"]
+
+    SOURCES --> INGEST
+    INGEST --> INTEL
+    INTEL --> AI
+    AI --> CASES
+    CASES --> GOVERNANCE
+    GOVERNANCE --> OUTCOME

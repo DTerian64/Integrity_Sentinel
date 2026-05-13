@@ -1,0 +1,53 @@
+flowchart TB
+    %% Integrity Sentinel - Risk Scoring Pipeline
+    %% Purpose: Show how raw enterprise activity becomes explainable risk scores.
+
+    RAW["Raw Enterprise Activity\nApprovals, transactions, access events, requests"]
+    NORMALIZE["Data Normalization"]
+    RESOLVE["Entity Resolution"]
+    FEATURES["Feature Extraction"]
+
+    BASELINE["Behavioral Baselines"]
+    RULES["Policy & Rules Evaluation"]
+    GRAPH["Graph Relationship Analysis"]
+    SEMANTIC["Semantic Similarity Analysis"]
+    ANOMALY["Anomaly Detection"]
+
+    SCORE["Composite Risk Scoring"]
+    EXPLAIN["Explainability Layer"]
+    ALERT["Risk Alert"]
+    CASE["Investigation Case Recommendation"]
+    DASH["Executive Risk Dashboard"]
+
+    RAW --> NORMALIZE
+    NORMALIZE --> RESOLVE
+    RESOLVE --> FEATURES
+
+    FEATURES --> BASELINE
+    FEATURES --> RULES
+    FEATURES --> GRAPH
+    FEATURES --> SEMANTIC
+    FEATURES --> ANOMALY
+
+    BASELINE --> SCORE
+    RULES --> SCORE
+    GRAPH --> SCORE
+    SEMANTIC --> SCORE
+    ANOMALY --> SCORE
+
+    SCORE --> EXPLAIN
+    EXPLAIN --> ALERT
+    ALERT --> CASE
+    ALERT --> DASH
+
+    CASE -->|investigator feedback| SCORE
+    DASH -->|executive thresholds / policy tuning| RULES
+
+    classDef ingest fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+    classDef analytics fill:#1e293b,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef output fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef feedback fill:#3b0764,stroke:#c084fc,color:#f3e8ff,stroke-width:1px;
+
+    class RAW,NORMALIZE,RESOLVE,FEATURES ingest;
+    class BASELINE,RULES,GRAPH,SEMANTIC,ANOMALY,SCORE,EXPLAIN analytics;
+    class ALERT,CASE,DASH output;

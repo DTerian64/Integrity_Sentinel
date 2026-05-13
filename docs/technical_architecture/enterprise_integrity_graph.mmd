@@ -1,0 +1,58 @@
+flowchart TB
+    %% Integrity Sentinel - Enterprise Integrity Graph
+    %% Purpose: Show how enterprise entities are connected for relationship intelligence.
+
+    EMP["Employee"]
+    MGR["Manager"]
+    DEPT["Department"]
+    VENDOR["Vendor"]
+    APPROVAL["Approval"]
+    TXN["Transaction"]
+    NOM["Nomination / Request"]
+    DEVICE["Device"]
+    IDENTITY["Identity Account"]
+    DOC["Document / Evidence"]
+    CASE["Investigation Case"]
+    ALERT["Risk Alert"]
+
+    EMP -->|reports_to| MGR
+    EMP -->|belongs_to| DEPT
+    MGR -->|manages| DEPT
+
+    EMP -->|submits| NOM
+    NOM -->|approved_by| APPROVAL
+    MGR -->|performs| APPROVAL
+    APPROVAL -->|authorizes| TXN
+
+    TXN -->|paid_to / associated_with| VENDOR
+    EMP -->|related_to| VENDOR
+    VENDOR -->|linked_to| DOC
+
+    EMP -->|uses| DEVICE
+    DEVICE -->|associated_with| IDENTITY
+    IDENTITY -->|accesses / modifies| DOC
+
+    NOM -->|generates| DOC
+    TXN -->|generates| DOC
+    APPROVAL -->|generates| DOC
+
+    ALERT -->|references| EMP
+    ALERT -->|references| VENDOR
+    ALERT -->|references| TXN
+    ALERT -->|references| APPROVAL
+    ALERT -->|references| NOM
+    ALERT -->|references| DOC
+
+    CASE -->|contains| ALERT
+    CASE -->|collects| DOC
+    CASE -->|investigates| EMP
+    CASE -->|investigates| VENDOR
+    CASE -->|investigates| TXN
+
+    classDef entity fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+    classDef risk fill:#312e81,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef evidence fill:#1e293b,stroke:#94a3b8,color:#f8fafc,stroke-width:1px;
+
+    class EMP,MGR,DEPT,VENDOR,APPROVAL,TXN,NOM,DEVICE,IDENTITY entity;
+    class ALERT,CASE risk;
+    class DOC evidence;

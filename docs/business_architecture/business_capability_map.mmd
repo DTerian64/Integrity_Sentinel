@@ -1,0 +1,40 @@
+flowchart TB
+
+    STRATEGY["Enterprise Integrity & Risk Strategy"]
+
+    subgraph GOVERNANCE["Governance & Oversight"]
+        POLICY["Policy Management"]
+        COMPLIANCE["Compliance Oversight"]
+        AUDIT["Audit Coordination"]
+        REPORTING["Executive Reporting"]
+    end
+
+    subgraph OPERATIONS["Operational Integrity"]
+        HR["HR Integrity Monitoring"]
+        PROCUREMENT["Procurement Integrity"]
+        ACCESS["Access & Insider Risk"]
+        APPROVALS["Approval Chain Monitoring"]
+    end
+
+    subgraph INVESTIGATION["Investigation & Response"]
+        TRIAGE["Risk Triage"]
+        CASES["Case Management"]
+        EVIDENCE["Evidence Review"]
+        ESCALATION["Escalation & Remediation"]
+    end
+
+    subgraph INTELLIGENCE["Intelligence & Analytics"]
+        GRAPH["Relationship Intelligence"]
+        ANOMALY["Behavioral Analytics"]
+        AI["AI Investigation Assistance"]
+        SCORING["Risk Scoring"]
+    end
+
+    STRATEGY --> GOVERNANCE
+    STRATEGY --> OPERATIONS
+    STRATEGY --> INVESTIGATION
+    STRATEGY --> INTELLIGENCE
+
+    OPERATIONS --> INVESTIGATION
+    INTELLIGENCE --> INVESTIGATION
+    GOVERNANCE --> INVESTIGATION

@@ -1,0 +1,130 @@
+flowchart TB
+    %% Integrity Sentinel - Admin-Led Ingestion Workflow
+    %% Purpose: Show how a tenant admin configures a governed source-system ingestion.
+
+    subgraph ADMIN_FLOW["Admin Configuration Workflow"]
+        ADMIN["Tenant Admin"]
+        CATALOG["Connector Catalog"]
+        CONNECT["Configure Source Connection"]
+        DISCOVER["Discover Available Metadata"]
+        SCOPE["Define Ingestion Scope"]
+        FILTER["Apply Metadata Filters"]
+        PREVIEW["Preview Sample Records"]
+        MAP["Map Fields to Integrity Ontology"]
+        VALIDATE["Validate Policy, Schema, and Access"]
+        SCHEDULE["Schedule or Run Ingestion"]
+    end
+
+    subgraph SOURCE_SYSTEMS["Enterprise Source Systems"]
+        HRIS["HRIS / Employee Systems"]
+        ERP["ERP / Finance Systems"]
+        PROCUREMENT["Procurement Systems"]
+        IAM["Identity & Access Systems"]
+        COLLAB["Collaboration Metadata"]
+        CUSTOM["Custom Business Applications"]
+    end
+
+    subgraph INGESTION["Data Ingestion Layer"]
+        CONNECTORS["Enterprise Connectors"]
+        BATCH["Batch Import Jobs"]
+        EVENTS["Event Stream Ingestion"]
+        NORMALIZE["Data Normalization & Mapping"]
+        INGEST_POLICY["Ingestion Policy / Metadata Scope"]
+    end
+
+    subgraph DATA_STORES["Core Data Stores"]
+        SQL["Operational Database\nCases, Alerts, Tenants, Policies"]
+        GRAPHDB["Graph Database\nEntities & Relationships"]
+        LAKE["Evidence Store / Data Lake"]
+        VECTOR["Vector Store\nSemantic Similarity & Retrieval"]
+        AUDITLOG["Immutable Audit Log"]
+    end
+
+    subgraph CORE["Integrity Intelligence Core"]
+        ONTOLOGY["Integrity Ontology / Entity Model"]
+        GRAPH["Enterprise Integrity Graph"]
+        RISK["Risk Scoring Engine"]
+        RULES["Policy & Rules Engine"]
+        ANOMALY["Anomaly Detection Engine"]
+        EVIDENCE["Evidence Correlation Service"]
+    end
+
+    subgraph INVESTIGATION["Downstream Investigation Workflow"]
+        AI["Sentinel AI Investigator"]
+        API["Core Platform API Layer"]
+        UI["Investigation Workspace"]
+    end
+
+    ADMIN --> CATALOG
+    CATALOG --> CONNECT
+    CONNECT --> DISCOVER
+    DISCOVER --> SCOPE
+    SCOPE --> FILTER
+    FILTER --> PREVIEW
+    PREVIEW --> MAP
+    MAP --> VALIDATE
+    VALIDATE --> SCHEDULE
+
+    CATALOG --> HRIS
+    CATALOG --> ERP
+    CATALOG --> PROCUREMENT
+    CATALOG --> IAM
+    CATALOG --> COLLAB
+    CATALOG --> CUSTOM
+
+    SCOPE --> INGEST_POLICY
+    FILTER --> INGEST_POLICY
+    MAP --> INGEST_POLICY
+    VALIDATE --> INGEST_POLICY
+
+    SCHEDULE --> CONNECTORS
+    HRIS --> CONNECTORS
+    ERP --> CONNECTORS
+    PROCUREMENT --> CONNECTORS
+    IAM --> CONNECTORS
+    COLLAB --> CONNECTORS
+    CUSTOM --> CONNECTORS
+
+    CONNECTORS --> BATCH
+    CONNECTORS --> EVENTS
+    BATCH --> NORMALIZE
+    EVENTS --> NORMALIZE
+    INGEST_POLICY --> NORMALIZE
+
+    NORMALIZE --> SQL
+    NORMALIZE --> GRAPHDB
+    NORMALIZE --> LAKE
+    NORMALIZE --> VECTOR
+    NORMALIZE --> AUDITLOG
+
+    SQL --> ONTOLOGY
+    GRAPHDB --> GRAPH
+    LAKE --> EVIDENCE
+    VECTOR --> EVIDENCE
+    AUDITLOG --> RULES
+
+    ONTOLOGY --> RISK
+    GRAPH --> RISK
+    RULES --> RISK
+    ANOMALY --> RISK
+    EVIDENCE --> RISK
+
+    RISK --> AI
+    GRAPH --> AI
+    EVIDENCE --> AI
+    AI --> API
+    API --> UI
+
+    classDef admin fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+    classDef source fill:#1e293b,stroke:#94a3b8,color:#f8fafc,stroke-width:1px;
+    classDef ingest fill:#312e81,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef data fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef core fill:#451a03,stroke:#f59e0b,color:#fff7ed,stroke-width:1px;
+    classDef downstream fill:#4c0519,stroke:#fb7185,color:#fff1f2,stroke-width:1px;
+
+    class ADMIN,CATALOG,CONNECT,DISCOVER,SCOPE,FILTER,PREVIEW,MAP,VALIDATE,SCHEDULE admin;
+    class HRIS,ERP,PROCUREMENT,IAM,COLLAB,CUSTOM source;
+    class CONNECTORS,BATCH,EVENTS,NORMALIZE,INGEST_POLICY ingest;
+    class SQL,GRAPHDB,LAKE,VECTOR,AUDITLOG data;
+    class ONTOLOGY,GRAPH,RISK,RULES,ANOMALY,EVIDENCE core;
+    class AI,API,UI downstream;

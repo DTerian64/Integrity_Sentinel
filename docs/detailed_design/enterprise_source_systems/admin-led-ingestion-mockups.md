@@ -62,16 +62,33 @@ Select connector
 
 ### Example Connector
 
-Procurement System
+Workday HCM
 
 Supported domains:
 
-- Vendors
-- Purchase orders
-- Invoices
-- Approvals
-- Payment events
-- Request metadata
+- Employees
+- Manager relationships
+- Supervisory organizations
+- Job profiles
+- Locations
+- Worker lifecycle events
+
+### Example Custom Connector
+
+Award Nominations
+
+Supported domains:
+
+- Nomination events
+- Nominators
+- Nominees
+- Approvers
+- Award categories
+- Approval status metadata
+
+### Data Store Reference
+
+Connector catalog records, tenant connector instances, credential metadata, metadata scope, mapping overrides, and schedules are defined in `connector-catalog-data-store.md`.
 
 ---
 
@@ -356,4 +373,3 @@ Risk output feeds the Sentinel AI Investigator, Core Platform API, and Investiga
 - Should attachments be stored in the evidence lake during the prototype phase?
 - Should ontology mapping be required before preview, or should preview happen first?
 - Should risk scoring run automatically after ingestion or require explicit admin approval?
-

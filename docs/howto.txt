@@ -1,0 +1,32 @@
+mmdc -i sc_high_level_architecture.mmd -o ./pngs/sc_high_level_architecture.png
+
+mmdc -i enterprise_integrity_graph.mmd -o ./pngs/enterprise_integrity_graph.png
+
+mmdc -i ai_investigation_workflow.mmd -o ./pngs/ai_investigation_workflow.svg
+
+mmdc -i risk_scoring_pipeline.mmd -o ./pngs/risk_scoring_pipeline.svg
+
+mmdc -i investigation_lifecycle.mmd -o ./pngs/investigation_lifecycle.svg
+
+mmdc -i multi_tenant_Saas.mmd -o ./pngs/multi_tenant_Saas.svg
+
+mmdc -i azure_deployment_topology.mmd -o ./pngs/azure_deployment_topology.svg
+
+mmdc -i enterprise_business_capability_map.mmd -o ./pngs/enterprise_business_capability_map.svg
+
+mmdc -i executive_Integrity_intelligence.mmd -o ./pngs/executive_Integrity_intelligence.svg
+
+mmdc -i fraud_integrity_management.mmd -o ./pngs/fraud_integrity_management.svg
+
+mmdc -i stakeholder_interaction.mmd -o ./pngs/stakeholder_interaction.svg
+
+mmdc -i enterprise_trust_lifecycle.mmd -o ./pngs/enterprise_trust_lifecycle.svg
+
+mmdc -i integrity_sentinel_product_positioning.mmd -o ./pngs/integrity_sentinel_product_positioning.svg
+
+mmdc -i enterprise_integrity_value_chain.mmd -o ./pngs/enterprise_integrity_value_chain.svg
+
+mmdc -i organizational_risk_domains.mmd -o ./pngs/organizational_risk_domains.svg
+
+
+mmdc -i ./detailed_design/admin-led-ingestion-workflow.mmd -o ./svg/admin-led-ingestion-workflow.png

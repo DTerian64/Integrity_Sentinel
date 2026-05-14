@@ -30,11 +30,36 @@ The platform is not intended to compete directly as:
 
 ---
 
+## Operational Intelligence Scope
+
+Integrity Sentinel is designed around governance-aligned operational intelligence and configurable enterprise controls.
+
+The platform emphasizes:
+
+- relationship intelligence
+- operational telemetry
+- workflow analytics
+- behavioral indicators
+- communication and collaboration metadata
+- explainable investigation workflows
+
+rather than unrestricted surveillance or opaque autonomous enforcement systems.
+
+The platform is intended to support operational trust, governance visibility, fraud detection, and enterprise integrity monitoring within configurable organizational and compliance boundaries.
+
 ## Differentiators
 
 ### Relationship Intelligence
 
-The Enterprise Integrity Graph enables relationship-based operational analysis.
+The Enterprise Integrity Graph enables relationship-based operational analysis across:
+
+- employees
+- approvals
+- vendors
+- transactions
+- workflow systems
+- operational telemetry
+- communication and collaboration metadata
 
 ### Explainable AI
 
@@ -49,6 +74,11 @@ The platform focuses on:
 - approval intelligence
 - behavioral risk
 - governance visibility
+- relationship analytics
+- operational accountability
+- explainable investigations
+
+Integrity Sentinel is designed to help organizations continuously evaluate operational risk across business processes, governance workflows, and enterprise relationships.
 
 ### AI-Assisted Investigations
 
@@ -88,6 +118,18 @@ The platform is designed around continuous integrity monitoring instead of perio
 - Public Sector Organizations
 
 ---
+## Governance & Privacy Principles
+
+Integrity Sentinel is designed around:
+
+- tenant-scoped intelligence
+- governed investigation workflows
+- explainable AI reasoning
+- evidence traceability
+- configurable access controls
+- metadata-oriented relationship analysis
+
+The platform architecture prioritizes operational integrity intelligence while preserving enterprise governance boundaries, authorization controls, and investigation accountability.
 
 ## Comparable Market Categories
 
@@ -100,7 +142,7 @@ Conceptually adjacent to:
 - UEBA platforms
 - operational intelligence systems
 
-while focusing specifically on organizational integrity and operational trust.
+while focusing specifically on organizational integrity, operational trust, explainable investigations, and relationship-centric operational intelligence.
 
 ---
 

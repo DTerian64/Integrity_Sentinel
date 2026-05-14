@@ -1,0 +1,65 @@
+flowchart TB
+    %% Integrity Sentinel - Data Ingestion Job Lifecycle
+    %% Purpose: Show how an activated connector becomes a governed ingestion run.
+
+    CONNECTOR["Activated Tenant Connector"]
+    REQUEST["Run Requested"]
+    PREFLIGHT["Preflight Validation"]
+    EXTRACT["Source Extraction"]
+    POLICY["Policy Enforcement"]
+    VALIDATE["Schema & Mapping Validation"]
+    NORMALIZE["Normalization"]
+    RESOLVE["Entity Resolution Preparation"]
+
+    subgraph STORES["Core Store Writes"]
+        SQL["Operational Database"]
+        GRAPH["Graph Database"]
+        LAKE["Evidence Store / Data Lake"]
+        VECTOR["Vector Store"]
+        AUDIT["Immutable Audit Log"]
+    end
+
+    DOWNSTREAM["Downstream Processing"]
+    FINALIZE["Run Finalization"]
+    HISTORY["Ingestion History"]
+    QUARANTINE["Quarantine Records"]
+    ALERTS["Alerts / Investigation Handoff"]
+
+    CONNECTOR --> REQUEST
+    REQUEST --> PREFLIGHT
+    PREFLIGHT --> EXTRACT
+    EXTRACT --> POLICY
+    POLICY --> VALIDATE
+    VALIDATE --> NORMALIZE
+    NORMALIZE --> RESOLVE
+    RESOLVE --> SQL
+    RESOLVE --> GRAPH
+    RESOLVE --> LAKE
+    RESOLVE --> VECTOR
+    RESOLVE --> AUDIT
+
+    VALIDATE -->|invalid or unsafe records| QUARANTINE
+    POLICY -->|policy violations| QUARANTINE
+    QUARANTINE --> AUDIT
+
+    SQL --> DOWNSTREAM
+    GRAPH --> DOWNSTREAM
+    LAKE --> DOWNSTREAM
+    VECTOR --> DOWNSTREAM
+    AUDIT --> FINALIZE
+    DOWNSTREAM --> FINALIZE
+    FINALIZE --> HISTORY
+    DOWNSTREAM --> ALERTS
+
+    classDef source fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+    classDef ingest fill:#312e81,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef data fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef exception fill:#7f1d1d,stroke:#fca5a5,color:#fff1f2,stroke-width:1px;
+    classDef output fill:#451a03,stroke:#f59e0b,color:#fff7ed,stroke-width:1px;
+
+    class CONNECTOR source;
+    class REQUEST,PREFLIGHT,EXTRACT,POLICY,VALIDATE,NORMALIZE,RESOLVE ingest;
+    class SQL,GRAPH,LAKE,VECTOR,AUDIT data;
+    class QUARANTINE exception;
+    class DOWNSTREAM,FINALIZE,HISTORY,ALERTS output;
+
